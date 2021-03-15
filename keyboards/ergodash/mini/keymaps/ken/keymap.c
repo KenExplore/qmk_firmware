@@ -13,7 +13,7 @@ enum custom_keycodes {
   ADJUST,
 };
 
-#define RSFT LT(KC_RSFT, KC_UP)
+#define KC_L1 LT(KC_RSFT, KC_UP)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -31,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT( \
     KC_ESC ,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,   _______,                        _______, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC, \
     KC_LGUI,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,  KC_LANG2,                       KC_LANG1, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT , \
-    KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_TAB ,                        KC_SPC , KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT   , \
+    KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_TAB ,                        KC_SPC , KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_L1  , \
     _______, _______, _______, KC_LCTL,            LOWER,   KC_TAB , _______,      _______, KC_SPC , RAISE,            KC_RALT, KC_LEFT, KC_DOWN, KC_RGHT  \
   ),
 
