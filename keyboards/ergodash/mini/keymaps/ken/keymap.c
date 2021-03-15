@@ -13,9 +13,9 @@ enum custom_keycodes {
   ADJUST,
 };
 
-#define KC_L1 LT(KC_RSFT, KC_UP)
-#define KC_L2 LT(KC_LCTL, KC_LANG2)
-#define KC_L3 LT(KC_RALT, KC_LANG1)
+#define KC_L1 SFT_T(KC_UP)
+#define KC_L2 CTL_T(KC_LANG2)
+#define KC_L3 ALT_T(KC_LANG1)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
