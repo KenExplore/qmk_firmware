@@ -14,8 +14,8 @@ enum custom_keycodes {
 };
 
 #define KC_L1 SFT_T(KC_UP)
-#define KC_L2 LT(_LOWER, KC_LANG2)
-#define KC_L3 LT(_RAISE, KC_LANG1)
+// #define KC_L2 LT(_LOWER, KC_LANG2)
+// #define KC_L3 LT(_RAISE, KC_LANG1)
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -35,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC ,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,  _______,                       _______,   KC_Y,    KC_U,    KC_I,   KC_O,     KC_P, KC_BSPC, \
     KC_LGUI,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,  _______,                       _______,   KC_H,    KC_J,    KC_K,   KC_L,  KC_COLN, KC_ENT , \
     KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,  KC_TAB ,                       KC_SPC ,   KC_N,    KC_M, KC_COMM, KC_DOT,  KC_QUOT, KC_L1  , \
-    _______, _______,  KC_SPC, KC_LCTL,            KC_L2,  KC_TAB , _______,     _______, KC_SPC ,  KC_L3,          KC_RALT, KC_LEFT, KC_DOWN, KC_RGHT  \
+    _______, _______,  KC_SPC, KC_LCTL,            LOWER,  KC_TAB , _______,     _______, KC_SPC ,  RAISE,          KC_RALT, KC_LEFT, KC_DOWN, KC_RGHT  \
   ),
 
   /* Lower
@@ -93,25 +93,42 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
+
+// ref: https://okapies.hateblo.jp/entry/2019/02/02/133953
+static bool lower_pressed = false;
+static bool raise_pressed = false;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case LOWER:
       if (record->event.pressed) {
+        lower_pressed = true;
         layer_on(_LOWER);
         update_tri_layer(_LOWER, _RAISE, _ADJUST);
       } else {
         layer_off(_LOWER);
         update_tri_layer(_LOWER, _RAISE, _ADJUST);
+          
+        if (lower_pressed) {
+          register_code(KC_LANG2);
+          unregister_code(KC_LANG2);
+        }
       }
       return false;
       break;
     case RAISE:
       if (record->event.pressed) {
+        raise_pressed = true;
         layer_on(_RAISE);
         update_tri_layer(_LOWER, _RAISE, _ADJUST);
       } else {
         layer_off(_RAISE);
         update_tri_layer(_LOWER, _RAISE, _ADJUST);
+          
+        if (raise_pressed) {
+          register_code(KC_LANG1);
+          unregister_code(KC_LANG1);
+        }
       }
       return false;
       break;
@@ -122,6 +139,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_off(_ADJUST);
       }
       return false;
+      break;
+    default:
+      if (record->event.pressed) {
+        // reset the flag
+        lower_pressed = false;
+        raise_pressed = false;
+      }
       break;
   }
   return true;
