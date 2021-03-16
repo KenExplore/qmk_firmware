@@ -25,7 +25,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------+------+------+--------------------+------+------+------+------+------+------+------|
    * |  GUI |   A  |   S  |   D  |   F  |   G  |      |                    |      |   H  |   J  |   K  |   L  |   :  | Enter|
    * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
-   * | Shift|   Z  |   X  |   C  |   V  |   B  |  TAB |                    | Space|   N  |   M  |   ,  |   .  |   ;  | Shift|
+   * | Shift|   Z  |   X  |   C  |   V  |   B  |  TAB |                    | Space|   N  |   M  |   ,  |   .  |   /  | Shift|
    * |-------------+------+------+------+------+------+------+------+------+------+------+------+------+------+-------------|
    * |      |      | Space| Ctrl |||||||| Lower|  TAB |      ||||||||      | Space| Raise||||||||  Alt | Left | Down | Right|
    * ,----------------------------------------------------------------------------------------------------------------------.
@@ -33,7 +33,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT( \
     KC_ESC ,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,  _______,                       _______, KC_Y,    KC_U,    KC_I,   KC_O,     KC_P, KC_BSPC, \
     KC_LGUI,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,  _______,                       _______, KC_H,    KC_J,    KC_K,   KC_L,  KC_COLN, KC_ENT , \
-    KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,  KC_TAB ,                       KC_SPC , KC_N,    KC_M, KC_COMM, KC_DOT,  KC_SCLN, KC_L1  , \
+    KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,  KC_TAB ,                       KC_SPC , KC_N,    KC_M, KC_COMM, KC_DOT,  KC_SLSH, KC_L1  , \
     _______, _______,  KC_SPC,   KC_L2,            LOWER,  KC_TAB , _______,     _______, KC_SPC , RAISE,           KC_L3, KC_LEFT, KC_DOWN, KC_RGHT  \
   ),
 
@@ -59,17 +59,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * ,----------------------------------------------------------------------------------------------------------------------.
   * |  ESC |   !  |   @  |   #  |   $  |   %  |      |                    |      |   *  |   <  |   >  |   (  |   )  | Bksp |
   * |------+------+------+------+------+------+------+--------------------+------+------+------+------+------+------+------|
-  * |  GUI |   ?  |   ^  |   &  |      |      |      |                    |      |   -  |   =  |   [  |   ]  |   '  |   /  |
+  * |  GUI |   ?  |   ^  |   &  |      |      |      |                    |      |   -  |   =  |   [  |   ]  |   '  |   "  |
   * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
-  * | Shift|   `  |   ~  |   |  |      |      |  TAB |                    | Space|   +  |   _  |   {  |   }  |   "  |   \  |
+  * | Shift|   `  |   ~  |   |  |      |      |  TAB |                    | Space|   +  |   _  |   {  |   }  |   ;  |   \  |
   * |-------------+------+------+------+------+------+------+------+------+------+------+------+------+------+-------------|
   * |      |      |      | Ctrl |||||||| Lower|  TAB |      ||||||||      | Space| Raise||||||||  Alt |      |      |      |
   * ,----------------------------------------------------------------------------------------------------------------------.
   */
   [_RAISE] = LAYOUT(
     KC_ESC , KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______,                       _______, KC_ASTR, KC_LT  , KC_GT  , KC_LPRN, KC_RPRN, KC_BSPC, \
-    KC_LGUI, KC_QUES, KC_CIRC, KC_AMPR, _______, _______, _______,                       _______, KC_MINS, KC_EQL , KC_LBRC, KC_RBRC, KC_QUOT, KC_SLSH, \
-    KC_LSFT, KC_GRV , KC_TILD, KC_PIPE, _______, _______,  KC_TAB,                       KC_SPC , KC_PLUS, KC_UNDS, KC_LCBR, KC_RCBR, KC_DQUO, KC_BSLS, \
+    KC_LGUI, KC_QUES, KC_CIRC, KC_AMPR, _______, _______, _______,                       _______, KC_MINS, KC_EQL , KC_LBRC, KC_RBRC, KC_QUOT, KC_DQUO, \
+    KC_LSFT, KC_GRV , KC_TILD, KC_PIPE, _______, _______,  KC_TAB,                       KC_SPC , KC_PLUS, KC_UNDS, KC_LCBR, KC_RCBR, KC_SCLN, KC_BSLS, \
     _______, _______, _______, KC_LCTL,             LOWER, KC_TAB, _______,     _______, KC_SPC , RAISE,            KC_RALT, _______, _______, _______  \
     ),
 
