@@ -58,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* Raise
   * ,----------------------------------------------------------------------------------------------------------------------.
-  * |  TAB |   !  |   @  |   #  |   $  |   %  |      |                    |      |   *  |   {  |   }  |   (  |   )  | Bksp |
+  * |  ESC |   !  |   @  |   #  |   $  |   %  |      |                    |      |   *  |   {  |   }  |   (  |   )  | Bksp |
   * |------+------+------+------+------+------+------+--------------------+------+------+------+------+------+------+------|
   * |  GUI |   ?  |   ^  |   &  |      |      |      |                    |      |   -  |   =  |   [  |   ]  |   :  |   "  |
   * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
@@ -68,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * ,----------------------------------------------------------------------------------------------------------------------.
   */
   [_RAISE] = LAYOUT(
-    KC_TAB , KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______,                       _______, KC_ASTR, KC_LCBR, KC_RCBR, KC_LPRN, KC_RPRN, KC_BSPC, \
+    KC_ESC , KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______,                       _______, KC_ASTR, KC_LCBR, KC_RCBR, KC_LPRN, KC_RPRN, KC_BSPC, \
     KC_LGUI, KC_QUES, KC_CIRC, KC_AMPR, _______, _______, _______,                       _______, KC_MINS, KC_EQL , KC_LBRC, KC_RBRC, KC_COLN, KC_DQUO, \
     KC_LSFT, KC_GRV , KC_TILD, KC_PIPE, _______, _______,  KC_SPC,                       KC_ENT , KC_PLUS, KC_UNDS, KC_LT  , KC_GT  , KC_BSLS, KC_ESC , \
     _______, _______, _______, KC_LCTL,             LOWER, KC_SPC, _______,     _______, KC_ENT , RAISE,            KC_RALT, _______, _______, _______  \
