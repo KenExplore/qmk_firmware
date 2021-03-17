@@ -16,7 +16,7 @@ enum custom_keycodes {
 #define KC_L1 SFT_T(KC_UP)
 // #define KC_L2 LT(_LOWER, KC_LANG2)
 // #define KC_L3 LT(_RAISE, KC_LANG1)
-#define KC_L4 LTCL(KC_SPC)
+#define KC_L4 LCTL(KC_SPC)
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
