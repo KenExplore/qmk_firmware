@@ -24,7 +24,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,----------------------------------------------------------------------------------------------------------------------.
    * |  TAB |   Q  |   W  |   E  |   R  |   T  |      |                    |      |   Y  |   U  |   I  |   O  |   P  | Bksp |
    * |------+------+------+------+------+------+------+--------------------+------+------+------+------+------+------+------|
-   * |  GUI |   A  |   S  |   D  |   F  |   G  |      |                    |      |   H  |   J  |   K  |   L  |   :  |   '  |
+   * |  GUI |   A  |   S  |   D  |   F  |   G  |      |                    |      |   H  |   J  |   K  |   L  |   ;  |   '  |
    * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
    * | Shift|   Z  |   X  |   C  |   V  |   B  | Space|                    | Enter|   N  |   M  |   ,  |   .  |   /  |  ESC |
    * |-------------+------+------+------+------+------+------+------+------+------+------+------+------+------+-------------|
@@ -33,7 +33,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
   [_QWERTY] = LAYOUT( \
     KC_TAB ,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,  _______,                       _______,   KC_Y,    KC_U,    KC_I,   KC_O,     KC_P, KC_BSPC, \
-    KC_LGUI,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,  _______,                       _______,   KC_H,    KC_J,    KC_K,   KC_L,  KC_COLN, KC_QUOT, \
+    KC_LGUI,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,  _______,                       _______,   KC_H,    KC_J,    KC_K,   KC_L,  KC_SCLN, KC_QUOT, \
     KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,  KC_SPC ,                       KC_ENT ,   KC_N,    KC_M, KC_COMM, KC_DOT,  KC_SLSH, KC_ESC , \
     _______, _______, _______, KC_LCTL,            LOWER,  KC_SPC , _______,     _______, KC_ENT ,  RAISE,          KC_RALT, KC_LEFT, KC_DOWN, KC_RGHT  \
   ),
@@ -60,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * ,----------------------------------------------------------------------------------------------------------------------.
   * |  TAB |   !  |   @  |   #  |   $  |   %  |      |                    |      |   *  |   {  |   }  |   (  |   )  | Bksp |
   * |------+------+------+------+------+------+------+--------------------+------+------+------+------+------+------+------|
-  * |  GUI |   ?  |   ^  |   &  |      |      |      |                    |      |   -  |   =  |   [  |   ]  |   ;  |   "  |
+  * |  GUI |   ?  |   ^  |   &  |      |      |      |                    |      |   -  |   =  |   [  |   ]  |   :  |   "  |
   * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
   * | Shift|   `  |   ~  |   |  |      |      | Space|                    | Enter|   +  |   _  |   <  |   >  |   \  |  ESC |
   * |-------------+------+------+------+------+------+------+------+------+------+------+------+------+------+-------------|
@@ -69,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   */
   [_RAISE] = LAYOUT(
     KC_TAB , KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______,                       _______, KC_ASTR, KC_LCBR, KC_RCBR, KC_LPRN, KC_RPRN, KC_BSPC, \
-    KC_LGUI, KC_QUES, KC_CIRC, KC_AMPR, _______, _______, _______,                       _______, KC_MINS, KC_EQL , KC_LBRC, KC_RBRC, KC_SCLN, KC_DQUO, \
+    KC_LGUI, KC_QUES, KC_CIRC, KC_AMPR, _______, _______, _______,                       _______, KC_MINS, KC_EQL , KC_LBRC, KC_RBRC, KC_COLN, KC_DQUO, \
     KC_LSFT, KC_GRV , KC_TILD, KC_PIPE, _______, _______,  KC_SPC,                       KC_ENT , KC_PLUS, KC_UNDS, KC_LT  , KC_GT  , KC_BSLS, KC_ESC , \
     _______, _______, _______, KC_LCTL,             LOWER, KC_SPC, _______,     _______, KC_ENT , RAISE,            KC_RALT, _______, _______, _______  \
     ),
