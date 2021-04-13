@@ -11,4 +11,5 @@ qmk compile -kb ergodash/mini -km ken
 ```
 
 Flash
+
 Use ```QMK Toolbox.app```
