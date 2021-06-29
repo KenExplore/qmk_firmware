@@ -181,7 +181,7 @@ bool fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
         layer_on(L_LOWER);
         update_tri_layer(L_LOWER, L_RAISE, L_ADJUST);
       } else {
-        layer_off(_LOWER);
+        layer_off(L_LOWER);
         update_tri_layer(L_LOWER, L_RAISE, L_ADJUST);
           
         if (lower_pressed && timer_elapsed(key_timer) < 200) {
@@ -196,10 +196,10 @@ bool fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         raise_pressed = true;
         key_timer = timer_read();
-        layer_on(_RAISE);
+        layer_on(L_RAISE);
         update_tri_layer(L_LOWER, L_RAISE, L_ADJUST);
       } else {
-        layer_off(_RAISE);
+        layer_off(L_RAISE);
         update_tri_layer(L_LOWER, L_RAISE, L_ADJUST);
           
         if (raise_pressed && timer_elapsed(key_timer) < 200) {
