@@ -172,7 +172,7 @@ static bool lower_pressed = false;
 static bool raise_pressed = false;
 static uint16_t key_timer = 0;
 
-void fire_lang1_lang2(keycode, record) {
+void fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case LOWER:
       if (record->event.pressed) {
