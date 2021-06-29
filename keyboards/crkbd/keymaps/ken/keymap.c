@@ -196,7 +196,7 @@ bool fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
         key_timer = timer_read();
         register_code(KC_RALT);
       } else {
-        unregister_code(KC_LCTL);
+        unregister_code(KC_RALT);
           
         if (ralt_pressed && timer_elapsed(key_timer) < 200) {
           // fire LANG1
