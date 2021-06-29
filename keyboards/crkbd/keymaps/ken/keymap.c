@@ -167,10 +167,60 @@ void oled_task_user(void) {
     }
 }
 
+// ref: https://okapies.hateblo.jp/entry/2019/02/02/133953
+static bool lctl_pressed = false;
+static bool ralt_pressed = false;
+static uint16_t key_timer = 0;
+
+bool fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case KC_LCTL:
+      if (record->event.pressed) {
+        lctl_pressed = true;
+        key_timer = timer_read();
+        register_code(KC_LCTL);
+      } else {
+        unregister_code(KC_LCTL);
+          
+        if (lctl_pressed && timer_elapsed(key_timer) < 200) {
+          // fire LANG2
+          register_code(KC_LANG2);
+          unregister_code(KC_LANG2);
+        }
+      }
+      return false;
+      break;
+    case KC_RALT:
+      if (record->event.pressed) {
+        ralt_pressed = true;
+        key_timer = timer_read();
+        register_code(KC_RALT);
+      } else {
+        unregister_code(KC_LCTL);
+          
+        if (ralt_pressed && timer_elapsed(key_timer) < 200) {
+          // fire LANG1
+          register_code(KC_LANG1);
+          unregister_code(KC_LANG1);
+        }
+      }
+      return false;
+      break;
+    default:
+      if (record->event.pressed) {
+        // reset the flag
+        lctl_pressed = false;
+        ralt_pressed = false;
+      }
+      break;
+  }
+  return true;
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     set_keylog(keycode, record);
   }
-  return true;
+  return fire_lang1_lang2(keycode, record);
 }
 #endif // OLED_DRIVER_ENABLE
