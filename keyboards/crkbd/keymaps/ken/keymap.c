@@ -184,7 +184,7 @@ enum custom_keycodes {
   ADJUST,
 };
 
-void fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
+bool fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case LOWER:
       if (record->event.pressed) {
@@ -238,13 +238,13 @@ void fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
       }
       break;
   }
+  return true;
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     set_keylog(keycode, record);
   }
-  fire_lang1_lang2(keycode, record);
-  return true;
+  return fire_lang1_lang2(keycode, record);
 }
 #endif // OLED_DRIVER_ENABLE
