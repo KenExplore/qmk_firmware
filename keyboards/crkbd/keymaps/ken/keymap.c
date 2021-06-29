@@ -172,22 +172,17 @@ static bool lower_pressed = false;
 static bool raise_pressed = false;
 static uint16_t key_timer = 0;
 
-#define _QWERTY 0
-#define _LOWER 1
-#define _RAISE 2
-#define _ADJUST 16
-
 bool fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case MO(1):
       if (record->event.pressed) {
         lower_pressed = true;
         key_timer = timer_read();
-        layer_on(_LOWER);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+        layer_on(L_LOWER);
+        update_tri_layer(L_LOWER, L_RAISE, L_ADJUST);
       } else {
         layer_off(_LOWER);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+        update_tri_layer(L_LOWER, L_RAISE, L_ADJUST);
           
         if (lower_pressed && timer_elapsed(key_timer) < 200) {
           // fire LANG2
@@ -202,10 +197,10 @@ bool fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
         raise_pressed = true;
         key_timer = timer_read();
         layer_on(_RAISE);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+        update_tri_layer(L_LOWER, L_RAISE, L_ADJUST);
       } else {
         layer_off(_RAISE);
-        update_tri_layer(_LOWER, _RAISE, _ADJUST);
+        update_tri_layer(L_LOWER, L_RAISE, L_ADJUST);
           
         if (raise_pressed && timer_elapsed(key_timer) < 200) {
           // fire LANG1
@@ -217,9 +212,9 @@ bool fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
       break;
     case MO(3):
       if (record->event.pressed) {
-        layer_on(_ADJUST);
+        layer_on(L_ADJUST);
       } else {
-        layer_off(_ADJUST);
+        layer_off(L_ADJUST);
       }
       return false;
       break;
