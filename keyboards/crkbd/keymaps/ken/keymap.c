@@ -177,16 +177,9 @@ static uint16_t key_timer = 0;
 #define _RAISE 2
 #define _ADJUST 16
 
-enum custom_keycodes {
-  QWERTY = SAFE_RANGE,
-  LOWER,
-  RAISE,
-  ADJUST,
-};
-
 bool fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case LOWER:
+    case MO(1):
       if (record->event.pressed) {
         lower_pressed = true;
         key_timer = timer_read();
@@ -204,7 +197,7 @@ bool fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case RAISE:
+    case MO(2):
       if (record->event.pressed) {
         raise_pressed = true;
         key_timer = timer_read();
@@ -222,7 +215,7 @@ bool fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case ADJUST:
+    case MO(3):
       if (record->event.pressed) {
         layer_on(_ADJUST);
       } else {
