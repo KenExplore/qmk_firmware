@@ -167,72 +167,10 @@ void oled_task_user(void) {
     }
 }
 
-// ref: https://okapies.hateblo.jp/entry/2019/02/02/133953
-static bool lower_pressed = false;
-static bool raise_pressed = false;
-static uint16_t key_timer = 0;
-
-bool fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case MO(1):
-      if (record->event.pressed) {
-        lower_pressed = true;
-        key_timer = timer_read();
-        layer_on(L_LOWER);
-        update_tri_layer(L_LOWER, L_RAISE, L_ADJUST);
-      } else {
-        layer_off(L_LOWER);
-        update_tri_layer(L_LOWER, L_RAISE, L_ADJUST);
-          
-        if (lower_pressed && timer_elapsed(key_timer) < 200) {
-          // fire LANG2
-          register_code(KC_LANG2);
-          unregister_code(KC_LANG2);
-        }
-      }
-      return false;
-      break;
-    case MO(2):
-      if (record->event.pressed) {
-        raise_pressed = true;
-        key_timer = timer_read();
-        layer_on(L_RAISE);
-        update_tri_layer(L_LOWER, L_RAISE, L_ADJUST);
-      } else {
-        layer_off(L_RAISE);
-        update_tri_layer(L_LOWER, L_RAISE, L_ADJUST);
-          
-        if (raise_pressed && timer_elapsed(key_timer) < 200) {
-          // fire LANG1
-          register_code(KC_LANG1);
-          unregister_code(KC_LANG1);
-        }
-      }
-      return false;
-      break;
-    case MO(3):
-      if (record->event.pressed) {
-        layer_on(L_ADJUST);
-      } else {
-        layer_off(L_ADJUST);
-      }
-      return false;
-      break;
-    default:
-      if (record->event.pressed) {
-        // reset the flag
-        lower_pressed = false;
-        raise_pressed = false;
-      }
-      break;
-  }
-  return true;
-}
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     set_keylog(keycode, record);
   }
-  return fire_lang1_lang2(keycode, record);
+  return true;
 }
 #endif // OLED_DRIVER_ENABLE
