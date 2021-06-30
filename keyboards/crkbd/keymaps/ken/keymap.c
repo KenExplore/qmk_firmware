@@ -171,8 +171,8 @@ void oled_task_user(void) {
 static bool l_pressed = false;
 static bool r_pressed = false;
 static uint16_t key_timer = 0;
-#define KC_L KC_LCTL;
-#define KC_R KC_RALT;
+#define KC_L KC_LCTL
+#define KC_R KC_RALT
 
 bool fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
