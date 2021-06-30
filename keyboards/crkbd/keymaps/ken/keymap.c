@@ -168,21 +168,23 @@ void oled_task_user(void) {
 }
 
 // ref: https://okapies.hateblo.jp/entry/2019/02/02/133953
-static bool lctl_pressed = false;
-static bool ralt_pressed = false;
+static bool l_pressed = false;
+static bool r_pressed = false;
 static uint16_t key_timer = 0;
+#define KC_L KC_LCTL;
+#define KC_R KC_RALT;
 
 bool fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case KC_LCTL:
+    case KC_L:
       if (record->event.pressed) {
-        lctl_pressed = true;
+        l_pressed = true;
         key_timer = timer_read();
-        register_code(KC_LCTL);
+        register_code(KC_L);
       } else {
-        unregister_code(KC_LCTL);
+        unregister_code(KC_L);
           
-        if (lctl_pressed && timer_elapsed(key_timer) < 200) {
+        if (l_pressed && timer_elapsed(key_timer) < 200) {
           // fire LANG2
           register_code(KC_LANG2);
           unregister_code(KC_LANG2);
@@ -190,15 +192,15 @@ bool fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case KC_RALT:
+    case KC_R:
       if (record->event.pressed) {
-        ralt_pressed = true;
+        r_pressed = true;
         key_timer = timer_read();
-        register_code(KC_RALT);
+        register_code(KC_R);
       } else {
-        unregister_code(KC_RALT);
+        unregister_code(KC_R);
           
-        if (ralt_pressed && timer_elapsed(key_timer) < 200) {
+        if (r_pressed && timer_elapsed(key_timer) < 200) {
           // fire LANG1
           register_code(KC_LANG1);
           unregister_code(KC_LANG1);
@@ -209,8 +211,8 @@ bool fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
     default:
       if (record->event.pressed) {
         // reset the flag
-        lctl_pressed = false;
-        ralt_pressed = false;
+        l_pressed = false;
+        r_pressed = false;
       }
       break;
   }
