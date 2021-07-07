@@ -18,11 +18,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
-#define KC_L4 LCTL(KC_SPC)
+#define _QWERTY 0
+#define _LOWER 1
+#define _RAISE 2
+#define _ADJUST 16
+
+enum custom_keycodes {
+  QWERTY = SAFE_RANGE,
+  LOWER,
+  RAISE,
+  ADJUST,
+};
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [0] = LAYOUT_split_3x6_3(
+  [_QWERTY] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -30,12 +40,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_ESC,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LCTL,   MO(1),  KC_SPC,     KC_ENT,   MO(2), KC_RALT
+                                          KC_LCTL,   LOWER,  KC_SPC,     KC_ENT,   RAISE, KC_RALT
                                       //`--------------------------'  `--------------------------'
 
   ),
 
-  [1] = LAYOUT_split_3x6_3(
+  [_LOWER] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -43,11 +53,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LCTL, _______,  KC_SPC,     KC_ENT,   MO(3), KC_RALT
+                                          KC_LCTL, _______,  KC_SPC,     KC_ENT,   RAISE, KC_RALT
                                       //`--------------------------'  `--------------------------'
   ),
 
-  [2] = LAYOUT_split_3x6_3(
+  [_RAISE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_TAB, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,  KC_DEL,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -55,11 +65,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE, KC_TILD,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LCTL,   MO(3),  KC_SPC,     KC_ENT, _______, KC_RALT
+                                          KC_LCTL,   LOWER,  KC_SPC,     KC_ENT, _______, KC_RALT
                                       //`--------------------------'  `--------------------------'
   ),
 
-  [3] = LAYOUT_split_3x6_3(
+  [_ADJUST] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
         RESET, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -177,15 +187,17 @@ static uint16_t key_timer = 0;
 
 bool fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case KC_L:
+    case LOWER:
       if (record->event.pressed) {
-        l_pressed = true;
+        lower_pressed = true;
         key_timer = timer_read();
-        register_code(KC_L);
+        layer_on(_LOWER);
+        update_tri_layer(_LOWER, _RAISE, _ADJUST);
       } else {
-        unregister_code(KC_L);
+        layer_off(_LOWER);
+        update_tri_layer(_LOWER, _RAISE, _ADJUST);
           
-        if (l_pressed && timer_elapsed(key_timer) < 200) {
+        if (lower_pressed && timer_elapsed(key_timer) < 200) {
           // fire LANG2
           register_code(KC_LANG2);
           unregister_code(KC_LANG2);
@@ -193,15 +205,17 @@ bool fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case KC_R:
+    case RAISE:
       if (record->event.pressed) {
-        r_pressed = true;
+        raise_pressed = true;
         key_timer = timer_read();
-        register_code(KC_R);
+        layer_on(_RAISE);
+        update_tri_layer(_LOWER, _RAISE, _ADJUST);
       } else {
-        unregister_code(KC_R);
+        layer_off(_RAISE);
+        update_tri_layer(_LOWER, _RAISE, _ADJUST);
           
-        if (r_pressed && timer_elapsed(key_timer) < 200) {
+        if (raise_pressed && timer_elapsed(key_timer) < 200) {
           // fire LANG1
           register_code(KC_LANG1);
           unregister_code(KC_LANG1);
@@ -209,11 +223,19 @@ bool fire_lang1_lang2(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+    case ADJUST:
+      if (record->event.pressed) {
+        layer_on(_ADJUST);
+      } else {
+        layer_off(_ADJUST);
+      }
+      return false;
+      break;
     default:
       if (record->event.pressed) {
         // reset the flag
-        l_pressed = false;
-        r_pressed = false;
+        lower_pressed = false;
+        raise_pressed = false;
       }
       break;
   }
