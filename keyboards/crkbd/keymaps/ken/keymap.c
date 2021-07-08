@@ -130,7 +130,7 @@ void oled_render_layer_state(void) {
             oled_write_ln_P(PSTR("Fn"), false);
             break;
         default:
-            oled_write_ln_P(PSTR("Unknown"), false);
+            oled_write_ln_P(PSTR("Undef-%ld", layer_state), false);
             break;
             
     }
