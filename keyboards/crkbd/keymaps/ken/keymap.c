@@ -89,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
    A(KC_LSFT), A(KC_Z), A(KC_X), A(KC_C), A(KC_V), A(KC_B),                      A(KC_N), A(KC_M),A(KC_COMM),A(KC_DOT),KC_DOWN, KC_UP,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                       A(KC_LCTL), _______,A(KC_SPC), A(KC_ENT), _______, _______
+                                       A(KC_LCTL), XXXXXXX,A(KC_SPC), A(KC_ENT), XXXXXXX, _______
                                       //`--------------------------'  `--------------------------'
   )
 };
@@ -130,7 +130,7 @@ void oled_render_layer_state(void) {
             oled_write_ln_P(PSTR("Fn"), false);
             break;
         default:
-            oled_write_ln_P(PSTR("Undef-%ld", layer_state), false);
+            oled_write_ln_P(PSTR("Unknown"), false);
             break;
             
     }
